@@ -18,18 +18,26 @@ public class AccountController {
     private final AccountService accountService;
 
 
-    @GetMapping
-    public List<Account> getAll() {
-        System.out.println(accountService.findAll());
-        return accountService.findAll();
-    }
+//    @GetMapping
+//    @Operation(summary = "get all information")
+//    public List<Account> getAllInformation() {
+//        System.out.println(accountService.findAll());
+//        return accountService.findAll();
+//    }
 
 
     @GetMapping("/{id}")
-    @Operation(summary = "find account by Id")
-    public AccountDTO findAccountById(@PathVariable Long id){
-        return  null;
+    @Operation(summary = "find account by id")
+    public AccountDTO findAccountById(@PathVariable Long id) {
+        return accountService.getAccountById(id);
     }
+
+    @GetMapping()
+    @Operation(summary = "find accounts by Client_id")
+    public AccountDTO findAccountById() {
+        return null;
+    }
+
 
 
     @PostMapping()
@@ -37,6 +45,8 @@ public class AccountController {
     public AccountDTO createAccount() {
         return null;
     }
+
+
 
 
 }

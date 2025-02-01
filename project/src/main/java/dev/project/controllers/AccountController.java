@@ -33,8 +33,8 @@ public class AccountController {
     }
 
     @GetMapping()
-    @Operation(summary = "find accounts by Client_id")
-    public AccountDTO findAccountById() {
+    @Operation(summary = "find accounts by clientId")
+    public AccountDTO findAccountByClientId() {
         return null;
     }
 

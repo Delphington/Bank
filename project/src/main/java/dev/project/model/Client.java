@@ -1,11 +1,15 @@
 package dev.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.yaml.snakeyaml.events.Event;
+import lombok.*;
 
-import javax.swing.text.StyledEditorKit;
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name ="clients")
 public class Client {
@@ -31,5 +35,10 @@ public class Client {
 
     @Column(name = "create_at")
     private LocalDateTime createAt;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Account> accountList;
 
 }

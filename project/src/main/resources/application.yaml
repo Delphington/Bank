@@ -6,7 +6,7 @@ spring:
     name: project
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5438/spring_aop # This is used first, since it's earlier
+    url: jdbc:postgresql://localhost:5439/db_spring # This is used first, since it's earlier
     username: postgres
     password: postgres
   jpa:

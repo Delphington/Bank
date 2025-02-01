@@ -3,10 +3,10 @@ services:
   db:
     image: postgres:latest
     ports:
-      - "5438:5432"
-    container_name: spring_aop
+      - "5439:5432"
+    container_name: db_spring
     restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=spring_aop
+      - POSTGRES_DB=db_spring

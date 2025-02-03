@@ -28,7 +28,7 @@ public class AccountService {
     @Transactional(readOnly = true)
     public AccountDTO getAccountById(Long id) {
         return accountMapper.convertAccountDto(accountRepository.findById(id)
-                .orElseThrow(() -> new NotFoundDataException("Model not found")));
+                .orElseThrow(() -> new NotFoundDataException("Account was not found, where id = "+id)));
     }
 
     @Transactional(readOnly = true)

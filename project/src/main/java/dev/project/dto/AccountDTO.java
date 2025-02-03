@@ -1,6 +1,6 @@
 package dev.project.dto;
 
-import dev.project.enumerator.AccountType;
+import dev.project.model.enumerator.AccountType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;

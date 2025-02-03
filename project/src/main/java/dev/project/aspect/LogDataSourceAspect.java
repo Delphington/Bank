@@ -21,7 +21,6 @@ public class LogDataSourceAspect {
 
     private final DataSourceErrorLogService dataSourceErrorLogService;
 
-
     @AfterThrowing(
             pointcut = "@annotation(dev.project.annotation.LogDataSourceError)",
             throwing = "exception")

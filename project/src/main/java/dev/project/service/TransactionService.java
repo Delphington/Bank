@@ -14,20 +14,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class TransactionService {
 
     private final TransactionRepository transactionRepository;
-    private final TransactionMapper transactionMapper;
+
     private final AccountService accountService;
+
+    private final TransactionMapper transactionMapper;
     private final AccountMapper accountMapper;
 
 
     @Transactional(readOnly = true)
     public TransactionDTO getTransactionById(Long id) {
         return transactionMapper.convertToDto(transactionRepository.findById(id).orElseThrow(
-                () -> new NotFoundDataException("transaction not faund")));
+                () -> new NotFoundDataException("Transaction was not found, where id = " + id)));
     }
 
 

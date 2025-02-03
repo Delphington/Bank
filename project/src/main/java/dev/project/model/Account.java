@@ -1,7 +1,6 @@
 package dev.project.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.project.enumerator.AccountType;
+import dev.project.model.enumerator.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
 

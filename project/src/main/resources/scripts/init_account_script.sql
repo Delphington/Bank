@@ -46,4 +46,17 @@ CREATE TABLE Transaction (
     sum DECIMAL(19,2) NOT NULL,
     transaction_time TIMESTAMP WITHOUT TIME ZONE
         DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+// Каскад еще добавил
+
+DROP TABLE data_error_logs;
+
+CREATE TABLE data_error_logs(
+    ID BIGSERIAL PRIMARY KEY,
+    stack_trace NOT NULL,
+    message varchar(255) NOT NULL,
+    signatureMethod varchar(200) NOT NULL,
+    create_at TIMESTAMP WITHOUT TIME ZONE
+        DEFAULT CURRENT_TIMESTAMP NOT NULL
 )
+

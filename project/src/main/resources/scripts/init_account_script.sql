@@ -38,3 +38,12 @@ VALUES
     (1, 'НАКОПИТЕЛЬНЫЙ', 50000.00),
     (2, 'КРЕДИТНЫЙ', -25000.75),
     (3, 'ИПОТЕЧНЫЙ', 1000000.00);
+
+
+CREATE TABLE Transaction (
+    id BIGSERIAL PRIMARY KEY,
+    account_id BIGINT NOT NULL,
+    sum DECIMAL(19,2) NOT NULL,
+    transaction_time TIMESTAMP WITHOUT TIME ZONE
+        DEFAULT CURRENT_TIMESTAMP NOT NULL
+)

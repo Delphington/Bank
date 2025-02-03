@@ -16,33 +16,33 @@ public class TransactionController {
 
     private final TransactionService transactionService;
 
-    @LogDataSourceError
-    @Operation(summary = "find transaction by id")
     @GetMapping("/{id}")
+    @Operation(summary = "find transaction by id")
+    @LogDataSourceError
     public TransactionDTO findTransactionById(@PathVariable Long id){
         return transactionService.getTransactionById(id);
     }
 
-    @LogDataSourceError
-    @Operation(summary = "find transaction by Account id")
     @GetMapping()
+    @Operation(summary = "find transaction by Account id")
+    @LogDataSourceError
     public List<TransactionDTO> findTransactionByAccountId(@Valid @RequestParam(name = "accountId") Long id){
         return transactionService.getTransactionListAccountId(id);
     }
 
 
-    @LogDataSourceError
-    @Operation(summary = "find transaction by Account id")
     @PostMapping()
+    @Operation(summary = "find transaction by Account id")
+    @LogDataSourceError
     public TransactionDTO createTransaction(@RequestBody TransactionDTO transactionDTO,
                                             @RequestParam("accountId") Long id){
         return transactionService.createTransaction(transactionDTO, id);
     }
 
 
-    @LogDataSourceError
-    @Operation(summary = "delete transaction by Account id")
     @DeleteMapping("/{id}")
+    @Operation(summary = "delete transaction by Account id")
+    @LogDataSourceError
     public void deleteTransaction(@PathVariable Long id){
         transactionService.deleteTransaction(id);
     }

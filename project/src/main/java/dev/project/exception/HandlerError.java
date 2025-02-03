@@ -1,7 +1,6 @@
 package dev.project.exception;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import dev.project.exception.response.TransactionErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

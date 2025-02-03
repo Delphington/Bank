@@ -20,6 +20,6 @@ public class ClientService {
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
         return clientMapper.convertClientDto(clientRepository.findById(id).orElseThrow(() ->
-                new NotFoundDataException("Client not found")));
+                new NotFoundDataException("Client was not found, where id = " + id)));
     }
 }

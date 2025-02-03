@@ -8,7 +8,6 @@ import dev.project.mapper.ClientMapper;
 import dev.project.model.Account;
 import dev.project.model.Client;
 import dev.project.repository.AccountRepository;
-import dev.project.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +27,7 @@ public class AccountService {
     @Transactional(readOnly = true)
     public AccountDTO getAccountById(Long id) {
         return accountMapper.convertAccountDto(accountRepository.findById(id)
-                .orElseThrow(() -> new NotFoundDataException("Account was not found, where id = "+id)));
+                .orElseThrow(() -> new NotFoundDataException("Account was not found, where id = " + id)));
     }
 
     @Transactional(readOnly = true)
@@ -36,15 +35,16 @@ public class AccountService {
         ClientDTO clientDTO = clientService.findById(clientId);
         Client client = clientMapper.convertModel(clientDTO);
         List<Account> list = accountRepository.findByClient(client);
+        if (list == null) {
+            throw new NotFoundDataException("Account has not list of Client, client_id = " + clientId);
+        }
         return accountMapper.convertAccountDtoList(list);
     }
 
     @Transactional
     public AccountDTO createAccount(AccountDTO accountDTO, Long clientId) {
-        System.out.println(accountDTO);
         Client client = clientMapper.convertModel(clientService.findById(clientId));
         Account account = accountMapper.convertToModel(accountDTO);
-
         account.setClient(client);
         account.setId(null);
         accountRepository.save(account);
@@ -54,7 +54,8 @@ public class AccountService {
 
     @Transactional
     public void deleteAccount(Long id) {
-        Account account = accountRepository.findById(id).orElseThrow(() -> new NotFoundDataException("Not found"));
+        Account account = accountRepository.findById(id).orElseThrow(
+                () -> new NotFoundDataException("Account was not found, where id = " + id));
         accountRepository.delete(account);
     }
 

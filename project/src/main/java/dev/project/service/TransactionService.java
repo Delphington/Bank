@@ -32,12 +32,14 @@ public class TransactionService {
                 () -> new NotFoundDataException("Transaction was not found, where id = " + id)));
     }
 
-
     @Transactional(readOnly = true)
     public List<TransactionDTO> getTransactionListAccountId(Long id){
         AccountDTO accountDTO = accountService.getAccountById(id);
         Account account = accountMapper.convertToModel(accountDTO);
         List<Transaction> list = transactionRepository.findByAccount(account);
+        if(list == null){
+            throw new NotFoundDataException("Account has not list of transaction, account_id = " + id);
+        }
         return transactionMapper.convertToListDto(list);
     }
 
@@ -45,9 +47,7 @@ public class TransactionService {
     public TransactionDTO createTransaction(TransactionDTO transactionDTO, Long accountId){
         AccountDTO accountDTO = accountService.getAccountById(accountId);
         Account account = accountMapper.convertToModel(accountDTO);
-
         Transaction transaction = transactionMapper.convertToModel(transactionDTO);
-
         transaction.setAccount(account);
         transaction.setId(null);
         transactionRepository.save(transaction);
@@ -58,7 +58,7 @@ public class TransactionService {
     @Transactional
     public void deleteTransaction(Long id) {
         Transaction transaction = transactionRepository.findById(id)
-                .orElseThrow(()->new NotFoundDataException("transaction not found"));
+                .orElseThrow(()->new NotFoundDataException("transaction was not found id = " + id));
         transactionRepository.delete(transaction);
     }
 }

@@ -1,20 +1,14 @@
 package dev.project.mapper;
 
 
-import dev.project.dto.ClientDTO;
-import dev.project.model.Client;
+import dev.project.dto.ClientDto;
+import dev.project.entity.Client;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface ClientMapper {
 
-    ClientDTO convertClientDto(Client client);
+    ClientDto convertClientDto(Client client);
 
-    //@Mapping()
-    Client convertModel(ClientDTO clientDTO);
-
-
-
-
+    Client convertToEntity(ClientDto clientDTO);
 }

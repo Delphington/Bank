@@ -1,6 +1,6 @@
 package dev.project.service;
 
-import dev.project.model.DataSourceErrorLog;
+import dev.project.entity.DataSourceErrorLog;
 import dev.project.repository.DataSourceErrorLogRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.exception.ExceptionUtils;

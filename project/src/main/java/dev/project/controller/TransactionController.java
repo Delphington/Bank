@@ -1,8 +1,8 @@
-package dev.project.controllers;
+package dev.project.controller;
 
 import dev.project.annotation.LogDataSourceError;
-import dev.project.dto.TransactionDTO;
-import dev.project.exception.ConversionValidationExceptionHandler;
+import dev.project.dto.TransactionDto;
+import dev.project.exception.util.ConversionValidationExceptionHandler;
 import dev.project.service.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -22,14 +22,14 @@ public class TransactionController {
     @GetMapping("/{id}")
     @Operation(summary = "Получить тразакцию по идентификатору")
     @LogDataSourceError
-    public TransactionDTO findTransactionById(@PathVariable Long id) {
+    public TransactionDto findTransactionById(@PathVariable Long id) {
         return transactionService.getTransactionById(id);
     }
 
     @GetMapping()
     @Operation(summary = "Получить транзакцию по индектификатору счета")
     @LogDataSourceError
-    public List<TransactionDTO> findTransactionByAccountId(@Valid @RequestParam(name = "accountId") Long id) {
+    public List<TransactionDto> findTransactionByAccountId(@Valid @RequestParam(name = "accountId") Long id) {
         return transactionService.getTransactionListAccountId(id);
     }
 
@@ -37,7 +37,7 @@ public class TransactionController {
     @PostMapping()
     @Operation(summary = "Создать транзакцию по идентификатору счета")
     @LogDataSourceError
-    public TransactionDTO createTransaction(@Valid @RequestBody TransactionDTO transactionDTO,
+    public TransactionDto createTransaction(@Valid @RequestBody TransactionDto transactionDTO,
                                             BindingResult bindingResult,
                                             @RequestParam("accountId") String accountId) {
         Long id = ConversionValidationExceptionHandler.handleTypeConversionErrors(accountId);

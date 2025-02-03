@@ -1,4 +1,4 @@
-package dev.project.model.enumerator;
+package dev.project.entity.enumerator;
 
 public enum AccountType {
     DEBIT,

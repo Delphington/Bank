@@ -1,7 +1,7 @@
 package dev.project.mapper;
 
-import dev.project.dto.AccountDTO;
-import dev.project.model.Account;
+import dev.project.dto.AccountDto;
+import dev.project.entity.Account;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -10,12 +10,12 @@ import java.util.List;
 @Mapper(componentModel = "spring") // определяем нужный контейнер
 public interface AccountMapper {
 
-    AccountDTO convertAccountDto(Account account);
+    AccountDto convertAccountDto(Account account);
 
-    List<AccountDTO> convertAccountDtoList(List<Account> accountList);
+    List<AccountDto> convertAccountDtoList(List<Account> accountList);
 
 
     @Mapping(target = "client", ignore = true)
-    Account convertToModel(AccountDTO accountDTO);
+    Account convertToEntity(AccountDto accountDTO);
 
 }

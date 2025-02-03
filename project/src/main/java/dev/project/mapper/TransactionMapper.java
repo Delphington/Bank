@@ -1,7 +1,7 @@
 package dev.project.mapper;
 
-import dev.project.dto.TransactionDTO;
-import dev.project.model.Transaction;
+import dev.project.dto.TransactionDto;
+import dev.project.entity.Transaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -10,10 +10,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TransactionMapper {
 
-    TransactionDTO convertToDto(Transaction transaction);
+    TransactionDto convertToDto(Transaction transaction);
 
-    List<TransactionDTO> convertToListDto(List<Transaction> list);
+    List<TransactionDto> convertToListDto(List<Transaction> list);
 
     @Mapping(target = "account", ignore = true)
-    Transaction convertToModel(TransactionDTO transactionDTO);
+    Transaction convertToEntity(TransactionDto transactionDTO);
 }

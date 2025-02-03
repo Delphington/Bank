@@ -1,6 +1,6 @@
 package dev.project.repository;
 
-import dev.project.model.DataSourceErrorLog;
+import dev.project.entity.DataSourceErrorLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

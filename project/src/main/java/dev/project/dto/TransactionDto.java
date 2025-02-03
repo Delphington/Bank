@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter @Setter @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionDTO {
+public class TransactionDto {
     private Long id;
 
     @NotNull(message = "Сумма обязательна для заполнения")

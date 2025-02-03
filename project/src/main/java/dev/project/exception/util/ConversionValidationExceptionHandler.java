@@ -1,5 +1,7 @@
-package dev.project.exception;
+package dev.project.exception.util;
 
+import dev.project.exception.DataConversionException;
+import dev.project.exception.ValidationException;
 import lombok.experimental.UtilityClass;
 import org.springframework.validation.BindingResult;
 

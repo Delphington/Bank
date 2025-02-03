@@ -3,7 +3,7 @@ package dev.project.dto;
 import lombok.Data;
 
 @Data
-public class ClientDTO {
+public class ClientDto {
     private Long id;
     private String firstName;
     private String lastName;

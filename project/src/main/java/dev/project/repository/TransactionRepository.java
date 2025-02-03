@@ -1,7 +1,7 @@
 package dev.project.repository;
 
-import dev.project.model.Account;
-import dev.project.model.Transaction;
+import dev.project.entity.Account;
+import dev.project.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

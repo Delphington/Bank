@@ -1,12 +1,12 @@
 package dev.project.service;
 
-import dev.project.dto.AccountDTO;
-import dev.project.dto.ClientDTO;
+import dev.project.dto.AccountDto;
+import dev.project.dto.ClientDto;
 import dev.project.exception.NotFoundDataException;
 import dev.project.mapper.AccountMapper;
 import dev.project.mapper.ClientMapper;
-import dev.project.model.Account;
-import dev.project.model.Client;
+import dev.project.entity.Account;
+import dev.project.entity.Client;
 import dev.project.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,15 +25,15 @@ public class AccountService {
     private final ClientMapper clientMapper;
 
     @Transactional(readOnly = true)
-    public AccountDTO getAccountById(Long id) {
+    public AccountDto getAccountById(Long id) {
         return accountMapper.convertAccountDto(accountRepository.findById(id)
                 .orElseThrow(() -> new NotFoundDataException("Account was not found, where id = " + id)));
     }
 
     @Transactional(readOnly = true)
-    public List<AccountDTO> getListAccountByClientId(Long clientId) {
-        ClientDTO clientDTO = clientService.findById(clientId);
-        Client client = clientMapper.convertModel(clientDTO);
+    public List<AccountDto> getListAccountByClientId(Long clientId) {
+        ClientDto clientDTO = clientService.findById(clientId);
+        Client client = clientMapper.convertToEntity(clientDTO);
         List<Account> list = accountRepository.findByClient(client);
         if (list == null) {
             throw new NotFoundDataException("Account has not list of Client, client_id = " + clientId);
@@ -42,9 +42,9 @@ public class AccountService {
     }
 
     @Transactional
-    public AccountDTO createAccount(AccountDTO accountDTO, Long clientId) {
-        Client client = clientMapper.convertModel(clientService.findById(clientId));
-        Account account = accountMapper.convertToModel(accountDTO);
+    public AccountDto createAccount(AccountDto accountDTO, Long clientId) {
+        Client client = clientMapper.convertToEntity(clientService.findById(clientId));
+        Account account = accountMapper.convertToEntity(accountDTO);
         account.setClient(client);
         account.setId(null);
         accountRepository.save(account);

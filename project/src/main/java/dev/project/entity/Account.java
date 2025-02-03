@@ -1,6 +1,6 @@
-package dev.project.model;
+package dev.project.entity;
 
-import dev.project.model.enumerator.AccountType;
+import dev.project.entity.enumerator.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
 

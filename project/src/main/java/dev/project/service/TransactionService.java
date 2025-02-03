@@ -1,12 +1,12 @@
 package dev.project.service;
 
-import dev.project.dto.AccountDTO;
-import dev.project.dto.TransactionDTO;
+import dev.project.dto.AccountDto;
+import dev.project.dto.TransactionDto;
 import dev.project.exception.NotFoundDataException;
 import dev.project.mapper.AccountMapper;
 import dev.project.mapper.TransactionMapper;
-import dev.project.model.Account;
-import dev.project.model.Transaction;
+import dev.project.entity.Account;
+import dev.project.entity.Transaction;
 import dev.project.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,15 +27,15 @@ public class TransactionService {
 
 
     @Transactional(readOnly = true)
-    public TransactionDTO getTransactionById(Long id) {
+    public TransactionDto getTransactionById(Long id) {
         return transactionMapper.convertToDto(transactionRepository.findById(id).orElseThrow(
                 () -> new NotFoundDataException("Transaction was not found, where id = " + id)));
     }
 
     @Transactional(readOnly = true)
-    public List<TransactionDTO> getTransactionListAccountId(Long id){
-        AccountDTO accountDTO = accountService.getAccountById(id);
-        Account account = accountMapper.convertToModel(accountDTO);
+    public List<TransactionDto> getTransactionListAccountId(Long id){
+        AccountDto accountDTO = accountService.getAccountById(id);
+        Account account = accountMapper.convertToEntity(accountDTO);
         List<Transaction> list = transactionRepository.findByAccount(account);
         if(list == null){
             throw new NotFoundDataException("Account has not list of transaction, account_id = " + id);
@@ -44,10 +44,10 @@ public class TransactionService {
     }
 
     @Transactional
-    public TransactionDTO createTransaction(TransactionDTO transactionDTO, Long accountId){
-        AccountDTO accountDTO = accountService.getAccountById(accountId);
-        Account account = accountMapper.convertToModel(accountDTO);
-        Transaction transaction = transactionMapper.convertToModel(transactionDTO);
+    public TransactionDto createTransaction(TransactionDto transactionDTO, Long accountId){
+        AccountDto accountDTO = accountService.getAccountById(accountId);
+        Account account = accountMapper.convertToEntity(accountDTO);
+        Transaction transaction = transactionMapper.convertToEntity(transactionDTO);
         transaction.setAccount(account);
         transaction.setId(null);
         transactionRepository.save(transaction);

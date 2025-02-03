@@ -1,8 +1,8 @@
-package dev.project.controllers;
+package dev.project.controller;
 
 import dev.project.annotation.LogDataSourceError;
-import dev.project.dto.AccountDTO;
-import dev.project.exception.ConversionValidationExceptionHandler;
+import dev.project.dto.AccountDto;
+import dev.project.exception.util.ConversionValidationExceptionHandler;
 import dev.project.service.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -22,21 +22,21 @@ public class AccountController {
     @GetMapping("/{id}")
     @Operation(summary = "Получить счет идентификатору id")
     @LogDataSourceError
-    public AccountDTO findAccountById(@PathVariable Long id) {
+    public AccountDto findAccountById(@PathVariable Long id) {
         return accountService.getAccountById(id);
     }
 
     @GetMapping()
     @Operation(summary = "Получить все счета по идентификатору клиента")
     @LogDataSourceError
-    public List<AccountDTO> findAccountByClientId(@RequestParam(name = "clientId", required = false) Long id) {
+    public List<AccountDto> findAccountByClientId(@RequestParam(name = "clientId", required = false) Long id) {
         return accountService.getListAccountByClientId(id);
     }
 
     @PostMapping()
     @Operation(summary = "Создание счета")
     @LogDataSourceError
-    public AccountDTO createAccount(@Valid @RequestBody AccountDTO accountDTO, BindingResult bindingResult,
+    public AccountDto createAccount(@Valid @RequestBody AccountDto accountDTO, BindingResult bindingResult,
                                     @RequestParam(name = "clientId", required = false) String clientId) {
         Long id = ConversionValidationExceptionHandler.handleTypeConversionErrors(clientId);
         ConversionValidationExceptionHandler.handleValidationErrors(bindingResult);

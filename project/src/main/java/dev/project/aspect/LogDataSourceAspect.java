@@ -26,7 +26,7 @@ public class LogDataSourceAspect {
             throwing = "exception")
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void logErrors(JoinPoint joinpoint, Exception exception){
-        log.error("ERROR WITH PROSES:  " + joinpoint.getSignature().getName());
+        log.error("ERROR WITH DATABASE:  " + joinpoint.getSignature().getName());
         dataSourceErrorLogService.saveErrorMessage(exception, joinpoint.getSignature().toShortString());
     }
 }

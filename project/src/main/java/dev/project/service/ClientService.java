@@ -7,6 +7,7 @@ import dev.project.model.Client;
 import dev.project.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -16,6 +17,7 @@ public class ClientService {
 
     private final ClientMapper clientMapper;
 
+    @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
         return clientMapper.convertClientDto(clientRepository.findById(id).orElseThrow(() ->
                 new NotFoundDataException("Client not found")));

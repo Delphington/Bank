@@ -13,4 +13,8 @@ public interface ClientMapper {
 
     //@Mapping()
     Client convertModel(ClientDTO clientDTO);
+
+
+
+
 }

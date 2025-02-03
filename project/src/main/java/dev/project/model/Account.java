@@ -24,7 +24,6 @@ public class Account {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false)
     @ToString.Exclude
-    @JsonIgnore
     private Client client;
 
     @Column(name = "account_type")

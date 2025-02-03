@@ -1,11 +1,10 @@
 package dev.project.controllers;
 
 import dev.project.dto.AccountDTO;
-import dev.project.model.Account;
 import dev.project.service.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,15 +16,6 @@ public class AccountController {
 
     private final AccountService accountService;
 
-
-//    @GetMapping
-//    @Operation(summary = "get all information")
-//    public List<Account> getAllInformation() {
-//        System.out.println(accountService.findAll());
-//        return accountService.findAll();
-//    }
-
-
     @GetMapping("/{id}")
     @Operation(summary = "find account by id")
     public AccountDTO findAccountById(@PathVariable Long id) {
@@ -34,19 +24,23 @@ public class AccountController {
 
     @GetMapping()
     @Operation(summary = "find accounts by clientId")
-    public AccountDTO findAccountByClientId() {
-        return null;
+    public List<AccountDTO> findAccountByClientId(@RequestParam(name = "clientId", required = false) Long id) {
+        return accountService.getListAccountByClientId(id);
     }
-
-
 
     @PostMapping()
     @Operation(summary = "Create Account")
-    public AccountDTO createAccount() {
-        return null;
+    public AccountDTO createAccount(@Valid @RequestBody AccountDTO accountDTO,
+                                    @RequestParam(name = "clientId", required = false) Long id) {
+
+        return accountService.createAccount(accountDTO, id);
     }
 
 
-
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete account by id")
+    public void deleteAccount(@PathVariable Long id){
+        accountService.deleteAccount(id);
+    }
 
 }

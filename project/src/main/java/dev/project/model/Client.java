@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name ="clients")
+@ToString
 public class Client {
 
     @Id
@@ -38,7 +39,7 @@ public class Client {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
     @ToString.Exclude
-    @JsonIgnore
+
     private List<Account> accountList;
 
 }

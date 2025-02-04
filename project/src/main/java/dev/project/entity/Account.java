@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 @Getter @Setter
@@ -31,4 +32,6 @@ public class Account {
 
     @Column(name = "balance")
     private BigDecimal balance;
+
+    //TODO: Добавить Created_at
 }

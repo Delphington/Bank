@@ -15,7 +15,7 @@ public class ConversionValidationExceptionHandler {
         try {
             id = Long.parseLong(tempId);
         } catch (RuntimeException e) {
-            throw new DataConversionException("Incorrect type clientId");
+            throw new DataConversionException("Incorrect type");
         }
         return id;
     }

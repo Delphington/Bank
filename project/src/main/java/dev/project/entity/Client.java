@@ -2,6 +2,7 @@ package dev.project.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,11 +35,11 @@ public class Client {
     private String blockedWhom;
 
     @Column(name = "create_at")
-    private LocalDateTime createAt;
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
     @ToString.Exclude
-
     private List<Account> accountList;
 
 }

@@ -1,4 +1,4 @@
-package dev.project.exception.util;
+package dev.project.util;
 
 import dev.project.exception.DataConversionException;
 import dev.project.exception.ValidationException;

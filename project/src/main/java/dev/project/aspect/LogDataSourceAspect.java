@@ -22,8 +22,13 @@ public class LogDataSourceAspect {
             pointcut = "@annotation(dev.project.annotation.LogDataSourceError)",
             throwing = "exception")
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void logErrors(JoinPoint joinpoint, Exception exception){
-        log.error("ERROR WITH DATABASE:  " + joinpoint.getSignature().getName());
-        dataSourceErrorLogService.saveErrorMessage(exception, joinpoint.getSignature().toShortString());
+    public void logErrors(JoinPoint joinPoint, Exception exception){
+        log.error("An error occurred while processing {}", joinPoint.getSignature().getName());
+        try {
+            dataSourceErrorLogService.sendError(exception, joinPoint.getSignature().toShortString());
+        } catch (Exception exc) {
+            log.error("An error occurred while trying to send event to kafka {}", joinPoint.getSignature().getName());
+            dataSourceErrorLogService.saveErrorInfo(exc, joinPoint.getSignature().toShortString());
+        }
     }
 }

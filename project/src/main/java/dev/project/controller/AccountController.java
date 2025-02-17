@@ -1,8 +1,9 @@
 package dev.project.controller;
 
 import dev.project.annotation.LogDataSourceError;
+import dev.project.annotation.Metric;
 import dev.project.dto.AccountDto;
-import dev.project.exception.util.ConversionValidationExceptionHandler;
+import dev.project.util.ConversionValidationExceptionHandler;
 import dev.project.service.AccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/account")
@@ -19,6 +21,7 @@ public class AccountController {
 
     private final AccountService accountService;
 
+    @Metric(limit = 1000L)
     @GetMapping("/{id}")
     @Operation(summary = "Получить счет идентификатору id")
     @LogDataSourceError

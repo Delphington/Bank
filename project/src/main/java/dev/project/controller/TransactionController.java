@@ -2,7 +2,7 @@ package dev.project.controller;
 
 import dev.project.annotation.LogDataSourceError;
 import dev.project.dto.TransactionDto;
-import dev.project.exception.util.ConversionValidationExceptionHandler;
+import dev.project.util.ConversionValidationExceptionHandler;
 import dev.project.service.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
